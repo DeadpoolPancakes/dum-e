@@ -1,48 +1,71 @@
 <!doctype html>
 <html lang="en">
-    <head>
-        <meta name="charset" value="utf-8">
-        <title>Dum-e</title>
-        <!-- Latest compiled and minified CSS -->
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
-<link href="css/materialdesignicons.min.css" media="all" rel="stylesheet" type="text/css" />
-<!-- Optional theme -->
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
-      <style type="text/css">
-            .main {
-                width:100%;
-                height:220px;
-                background:#F0F0F0;
-                position:relative;
-            }
-            .main ul, .main li {
-                list-style:none;
-                margin:0;
-                padding:0;
-            }
-            .main li {
-                width:75px;
-                height:50px;
-                position:absolute;
-                cursor:pointer;
-                line-height:50px;
-                text-align:center;
-            }
-            .main .up {left:50%; margin-left:-35px;}
-            .main .down {left:50%; bottom:0; margin-left:-35px;}
-            .main .left {top:50%; margin-top:-35px;}
-            .main .right {top:50%; right:25px; margin-top:-35px;}
-        </style>    
+
+<head>
+    <meta name="charset" value="utf-8">
+    <title>Dum-e</title>
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <link href="{{ url_for( 'static',filename='css/materialdesignicons.min.css' ) }}" media="all" rel="stylesheet" type="text/css" />
+    <!-- Optional theme -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+    <style type="text/css">
+        .main {
+            width: 100%;
+            height: 220px;
+            background: #F0F0F0;
+            position: relative;
+        }
+        
+        .main ul,
+        .main li {
+            list-style: none;
+            margin: 0;
+            padding: 0;
+        }
+        
+        .main li {
+            width: 75px;
+            height: 50px;
+            position: absolute;
+            cursor: pointer;
+            line-height: 50px;
+            text-align: center;
+        }
+        
+        .main .up {
+            left: 50%;
+            margin-left: -35px;
+        }
+        
+        .main .down {
+            left: 50%;
+            bottom: 0;
+            margin-left: -35px;
+        }
+        
+        .main .left {
+            top: 50%;
+            margin-top: -35px;
+        }
+        
+        .main .right {
+            top: 50%;
+            right: 25px;
+            margin-top: -35px;
+        }
+    </style>
 </head>
-    <body>
+
+<body>
     <div class="container">
 
 
         <div class="row">
             <div class="col-xs-12">
                 <h1>Dum-e</h1>
-            </div>    
-        </div>       
+            </div>
+        </div>
         <div class="row">
             <div class="col-xs-12">
                 <ul class="main">
@@ -54,115 +77,117 @@
             </div>
             <div class="col-xs-12">
                 <div class="col-xs-6 ">
-                        <button data-action"grip:1" class="btn btn-success pull-left"><i class="mdi mdi-spotlight-beam mdi-48px"></i></button>
-                        <button data-action"grip:0" class="btn btn-danger pull-right" ><i class="mdi mdi-spotlight-beam mdi-48px"></i></button>  
+                    <button data-action "grip:1" class="btn btn-success pull-left"><i class="mdi mdi-spotlight-beam mdi-48px"></i></button>
+                    <button data-action "grip:0" class="btn btn-danger pull-right"><i class="mdi mdi-spotlight-beam mdi-48px"></i></button>
                 </div>
                 <div class="col-xs-6 ">
-                    <button data-action"suction:1" class="btn btn-success pull-left"><i class="mdi mdi-gas-cylinder mdi-48px mdi-flip-horizontal"></i></button>
-                    <button data-action"suction:0" class="btn btn-danger pull-right"><i class="mdi mdi-gas-cylinder mdi-48px mdi-flip-vertical"></i></button>  
-                </div> 
-            </div>         
+                    <button data-action "suction:1" class="btn btn-success pull-left"><i class="mdi mdi-gas-cylinder mdi-48px mdi-flip-horizontal"></i></button>
+                    <button data-action "suction:0" class="btn btn-danger pull-right"><i class="mdi mdi-gas-cylinder mdi-48px mdi-flip-vertical"></i></button>
+                </div>
+            </div>
         </div>
     </div>
     <script src="https://code.jquery.com/jquery-3.1.1.min.js" integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8=" crossorigin="anonymous"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
     <script type="text/javascript">
+        var current_pan = 90;
+        var current_tilt = 90;
+        var pantilt_speed = 60; // Delay between increments in ms
+        var interval = null;
+        var current_direction = null;
+        var current_angle = null;
 
-    var current_pan = 90;
-    var current_tilt = 90;
-    var pantilt_speed = 60; // Delay between increments in ms
-    var interval = null;
-    var current_direction = null;
-    var current_angle = null;
+        $(function() {
+            $(window).on('keydown', function(e) {
+                clearInterval(interval);
+                switch (e.keyCode) {
+                    case 87:
+                    case 38: // Arrow Up
+                        current_direction = 'up';
+                        current_angle = 5;
+                        $.get('/api/' + current_direction + '/' + current_angle);
+                        break;
+                    case 83:
+                    case 40: // Arrow Down
+                        current_direction = 'down';
+                        current_angle = -5;
+                        $.get('/api/' + current_direction + '/' + current_angle);
+                        break;
+                    case 65:
+                    case 37: // Arrow Left
+                        current_direction = 'left';
+                        current_angle = 5;
+                        $.get('/api/' + current_direction + '/' + current_angle);
+                        break;
+                    case 68:
+                    case 39: // Arrow Right
+                        current_direction = 'right';
+                        current_angle = -5;
+                        $.get('/api/' + current_direction + '/' + current_angle);
+                        break;
+                    case 109:
+                        current_direction = 'forward';
+                        current_angle = 5;
+                        $.get('/api/' + current_direction + '/' + current_angle);
+                        break;
+                    case 107:
+                        current_direction = 'back';
+                        current_angle = -5;
+                        $.get('/api/' + current_direction + '/' + current_angle);
+                        break;
+                }
+            });
+            $(window).on('keyup', function(e) {
+                clearInterval(interval)
+            });
+            $('.main').on('mousedown', 'li', function(e) {
+                    e.preventDefault();
+                    clearInterval(interval);
 
-    $(function(){
-        $(window).on('keydown',function(e){
-            clearInterval(interval);
-            switch(e.keyCode){
-                case 87:
-                case 38: // Arrow Up
-                    current_direction = 'up';
-                    current_angle = 5;
-                    $.get('/api/' + current_direction + '/' + current_angle); 
-                    break;
-                case 83:    
-                case 40: // Arrow Down
-                    current_direction = 'down';
-                    current_angle = -5;
-                    $.get('/api/' + current_direction + '/' + current_angle); 
-                    break;
-                case 65:    
-                case 37: // Arrow Left
-                    current_direction = 'left';
-                    current_angle = 5;
-                    $.get('/api/' + current_direction + '/' + current_angle); 
-                    break;
-                case 68:    
-                case 39: // Arrow Right
-                    current_direction = 'right';
-                    current_angle = -5;
-                    $.get('/api/' + current_direction + '/' + current_angle); 
-                    break;
-                case 109:
-                    current_direction = 'forward';
-                    current_angle = 5;
-                    $.get('/api/' + current_direction + '/' + current_angle);
-                    break;
-                case 107:
-                    current_direction = 'back';
-                    current_angle = -5;
-                    $.get('/api/' + current_direction + '/' + current_angle);     
-                    break;  
+                    var obj = $(this);
+                    var action = obj.data('action');
+                    current_direction = action.split(':')[0];
+                    current_angle = parseInt(action.split(':')[1]);
+
+                    interval = setInterval(pantilt, pantilt_speed);
+                })
+                .on('mouseup', 'li', function(e) {
+                    clearInterval(interval);
+                });
+
+            function pantilt() {
+                var angle = 0;
+
+                if (current_direction == 'up') {
+                    current_pan += current_angle;
+                    if (current_pan < 0) current_pan = 0;
+                    if (current_pan > 180) current_pan = 180;
+                    angle = current_pan;
+                }
+
+                if (current_direction == 'down') {
+                    current_tilt += current_angle;
+                    if (current_tilt < 0) current_tilt = 0;
+                    if (current_tilt > 180) current_tilt = 180;
+                    angle = current_tilt;
+                }
+                if (current_direction == 'left') {
+                    current_tilt += current_angle;
+                    if (current_tilt < 0) current_tilt = 0;
+                    if (current_tilt > 180) current_tilt = 180;
+                    angle = current_tilt;
+                }
+                if (current_direction == 'right') {
+                    current_tilt += current_angle;
+                    if (current_tilt < 0) current_tilt = 0;
+                    if (current_tilt > 180) current_tilt = 180;
+                    angle = current_tilt;
+                }
+
+                $.get('/api/' + current_direction + '/' + angle);
             }
         });
-        $(window).on('keyup',function(e){clearInterval(interval)});
-        $('.main').on('mousedown','li',function(e){
-            e.preventDefault();
-            clearInterval(interval);
+    </script>
+</body>
 
-            var obj = $(this);
-            var action = obj.data('action');
-            current_direction = action.split(':')[0];
-            current_angle = parseInt(action.split(':')[1]);
-
-            interval = setInterval(pantilt, pantilt_speed);
-        })
-        .on('mouseup','li',function(e){
-            clearInterval(interval);
-        });
-
-        function pantilt(){
-            var angle = 0;
-
-            if(current_direction == 'up'){
-                current_pan += current_angle;
-                if(current_pan < 0) current_pan = 0;
-                if(current_pan > 180) current_pan = 180;
-                angle = current_pan;
-            }
-
-            if(current_direction == 'down'){
-                current_tilt += current_angle;
-                if(current_tilt < 0) current_tilt = 0;
-                if(current_tilt > 180) current_tilt = 180;
-                angle = current_tilt;
-            }
-            if(current_direction == 'left'){
-                current_tilt += current_angle;
-                if(current_tilt < 0) current_tilt = 0;
-                if(current_tilt > 180) current_tilt = 180;
-                angle = current_tilt;
-            }
-            if(current_direction == 'right'){
-                current_tilt += current_angle;
-                if(current_tilt < 0) current_tilt = 0;
-                if(current_tilt > 180) current_tilt = 180;
-                angle = current_tilt;
-            }                                      
-
-            $.get('/api/' + current_direction + '/' + angle); 
-        }
-    });
-</script>
-    </body>
 </html>

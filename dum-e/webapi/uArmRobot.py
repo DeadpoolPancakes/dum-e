@@ -44,7 +44,7 @@ class robot:
                     if (self.debug): print ("Connected!")
                     return True
             line = self.ser.readline() # Ignore if @6 response is given
-            print (line)
+            #print (line)
                         
         except Exception as e:
             if (self.debug): print ("Error trying to connect to: " + self.serialport + " - " + str(e))

@@ -112,12 +112,7 @@
                     current_direction = 'back';
                     current_angle = -5;
                     $.get('/api/' + current_direction + '/' + current_angle);     
-                    break;
-                case 107:
-                    current_direction = 'back';
-                    current_angle = -5;
-                    $.get('/api/' + current_direction + '/' + current_angle);     
-                    break;    
+                    break;  
             }
         });
         $(window).on('keyup',function(e){clearInterval(interval)});

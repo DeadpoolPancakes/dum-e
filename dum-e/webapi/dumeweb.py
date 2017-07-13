@@ -26,6 +26,12 @@ myRobot.goto(200,0,100,6000)
 def home():
     return render_template('gui.html')
 
+@app.route('/api/action/<action>')
+def action(action)
+    if action = "grip"
+        myRobot.gripper(True)
+        return "holding"
+    
 @app.route('/api/gripper/<int:on>')
 def gripper(on):
     if on == 1:

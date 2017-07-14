@@ -44,7 +44,7 @@ class robot:
                     if (self.debug): print ("Connected!")
                     return True
             line = self.ser.readline() # Ignore if @6 response is given
-            #print (line)
+            print (line)
                         
         except Exception as e:
             if (self.debug): print ("Error trying to connect to: " + self.serialport + " - " + str(e))
@@ -117,6 +117,7 @@ class robot:
         self.gripping = state
         cmd = protocol.SET_GRIPPER.format(int(state))
         self.sendcmd(cmd,True)
+
     def mode(self, modeid):
         # 0= Normal
         # 1= Laser
@@ -125,14 +126,20 @@ class robot:
         cmd = protocol.SET_MODE.format(modeid)
         self.sendcmd(cmd,True)
 
+    def get_angle(self,n):
+            n = str(int(n))
+            cmd = protocol.GET_ANGLE_OF_JOINT.format(n)
+            self.sendcmd(cmd, True)
+
     def end(self):
         self.moving = True
         x = str(0)
         y = str(0)
         z = str(0)
-        s = str(6000)   
+        s = str(3000)   
         cmd = protocol.SET_POSITION.format(x,y,z,s)
-        self.sendcmd(cmd, True) 
+        self.sendcmd(cmd, True)
+        self.ser.close() 
 
     @staticmethod
     def PointsInCircum(r,n):
@@ -158,30 +165,3 @@ class robot:
         self.goto(offsetx+bx,offsety+by,DrawingHeight,Speed)
         time.sleep(0.5)
         self.goto(offsetx+bx,offsety+by,StartFinishedHeight,Speed)
-
-        
-        
-            
-
-            
-        
-
-        
-
-        
-
-
-
-        
-
-        
-            
-            
-        
-
-
-
-
-
-
-

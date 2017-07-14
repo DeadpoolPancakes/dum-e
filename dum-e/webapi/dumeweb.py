@@ -37,7 +37,7 @@ def action(action):
     if action == 'grip':
         myRobot.gripper(True)
         return "holding"
-    
+
     if action == 'suction':
         myRobot.pump(True)
         return 'suction cup activated'
@@ -88,12 +88,12 @@ def direction(direction, angle):
         return "moving down"
 
     elif direction == 'forward':
-        myRobot.gotorel(angle,0,0,speed)
+        myRobot.gotorel(-angle,0,0,speed)
        #return "{{'moving':{}}}".format(angle)
         return "moving forward"
 
     elif direction == 'back':
-        myRobot.gotorel(-angle,0,0,speed)
+        myRobot.gotorel(angle,0,0,speed)
         #return "{{'moving':{}}}".format(angle)  
         return "moving back"      
 

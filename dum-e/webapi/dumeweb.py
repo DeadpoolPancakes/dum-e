@@ -32,6 +32,10 @@ def action(action):
         myRobot.gripper(True)
         return "holding"
     
+    if action == 'suction':
+        myRobot.pump(True)
+        return 'suction cup activated'
+    
 @app.route('/api/gripper/<int:on>')
 def gripper(on):
     if on == 1:

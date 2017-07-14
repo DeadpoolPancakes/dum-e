@@ -12,19 +12,25 @@ try:
 except ImportError:
     exit("This script requires the flask module\nInstall with: sudo pip install flask")
 
-
 myRobot.debug = False   # Enable / Disable debug output on screen, by default disabled
-myRobot.connect()
 myRobot.mode(0)   # Set mode to Normal
 app = Flask(__name__)
 speed = 3000
 
-time.sleep(1)
-myRobot.goto(200,0,100,6000)
 
 @app.route('/')
 def home():
     return render_template('gui.html')
+
+@app.route('/api/connect/<int: connect>')
+def connect(connect):
+    if connect = 1:
+        myRobot.connect()
+        time.sleep(1)
+        myRobot.goto(200,0,100,3000)
+    elif connect = 0:
+        time.sleep(1)
+        myRobot.end()    
 
 @app.route('/api/action/<action>')
 def action(action):
@@ -44,7 +50,6 @@ def gripper(on):
     elif on == 0:
         myRobot.gripper(False)
         return "off"    
-
 
 @app.route('/api/pump/<int:on>')
 def pump(on):

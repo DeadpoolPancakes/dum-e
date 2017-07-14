@@ -1,6 +1,7 @@
 #!/usr/bin/env python
 import uArmRobot
 import time
+import sys
 from sys import exit
 
 serialport = "/dev/ttyACM0"  # for linux like system

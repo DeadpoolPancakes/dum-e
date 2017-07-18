@@ -16,7 +16,7 @@ myRobot.debug = False   # Enable / Disable debug output on screen, by default di
 myRobot.mode(0)   # Set mode to Normal
 app = Flask(__name__)
 speed = 3000
-
+myRobot.connect()
 
 @app.route('/')
 def home():
@@ -28,11 +28,13 @@ def connect(connect):
         myRobot.connect()
         time.sleep(1)
         myRobot.goto(200,0,100,3000)
-        return "connected"
+        return "{'dume':'connected'}"
+
     elif connect == 0:
         time.sleep(1)
         myRobot.end()
-        return "disconnected"    
+        return "{'dume':'disconnected'}"
+   
 
 @app.route('/api/action/<action>')
 def action(action):

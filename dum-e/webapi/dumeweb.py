@@ -22,15 +22,17 @@ speed = 3000
 def home():
     return render_template('gui.html')
 
-@app.route('/api/connect/<int: connect>')
+@app.route('/api/connect/<int:connect>')
 def connect(connect):
-    if connect = 1:
+    if connect == 1:
         myRobot.connect()
         time.sleep(1)
         myRobot.goto(200,0,100,3000)
-    elif connect = 0:
+        return "connected"
+    elif connect == 0:
         time.sleep(1)
-        myRobot.end()    
+        myRobot.end()
+        return "disconnected"    
 
 @app.route('/api/action/<action>')
 def action(action):

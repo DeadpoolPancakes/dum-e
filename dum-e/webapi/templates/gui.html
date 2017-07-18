@@ -76,13 +76,17 @@
                 </ul>
             </div>
             <div class="col-xs-12">
-                <div class="col-xs-6 ">
-                    <button data-action "grip:1" class="btn btn-success pull-left"><i class="mdi mdi-spotlight-beam mdi-48px"></i></button>
-                    <button data-action "grip:0" class="btn btn-danger pull-right"><i class="mdi mdi-spotlight-beam mdi-48px"></i></button>
+                <div class="col-xs-2 action col-xs-offset-1">
+                    <button data-action="grippers:+1" class="btn btn-success pull-left"><i class="mdi mdi-spotlight-beam mdi-48px"></i></button>
+                    <button data-action="gripper:+0" class="btn btn-danger pull-right"><i class="mdi mdi-spotlight-beam mdi-48px"></i></button>
                 </div>
-                <div class="col-xs-6 ">
-                    <button data-action "suction:1" class="btn btn-success pull-left"><i class="mdi mdi-gas-cylinder mdi-48px mdi-flip-horizontal"></i></button>
-                    <button data-action "suction:0" class="btn btn-danger pull-right"><i class="mdi mdi-gas-cylinder mdi-48px mdi-flip-vertical"></i></button>
+                <div class="col-xs-2 col-xs-offset-2 action">
+                    <button data-action="pump:+1" class="btn btn-success pull-left"><i class="mdi mdi-gas-cylinder mdi-48px mdi-flip-horizontal"></i></button>
+                    <button data-action="pump:+0" class="btn btn-danger pull-right"><i class="mdi mdi-gas-cylinder mdi-48px mdi-flip-vertical"></i></button>
+                </div>
+                <div class="col-xs-2 col-xs-offset-2 action">
+                    <button data-action="connect:+1" class="btn btn-success pull-left"><i class="mdi mdi-lan-connect mdi-48px"></i></button>
+                    <button data-action="connect:+0" class="btn btn-danger pull-right"><i class="mdi mdi-lan-disconnect mdi-48px"></i></button>
                 </div>
             </div>
         </div>
@@ -154,6 +158,20 @@
                 .on('mouseup', 'li', function(e) {
                     clearInterval(interval);
                 });
+            $('.action').on('mousedown', 'button', function(e) {
+                    e.preventDefault();
+                    clearInterval(interval);
+
+                    var obj = $(this);
+                    var action = obj.data('action');
+                    current_direction = action.split(':')[0];
+                    current_angle = parseInt(action.split(':')[1]);
+
+                    interval = setInterval(pantilt, pantilt_speed);
+                })
+                .on('mouseup', 'button', function(e) {
+                    clearInterval(interval);
+                });
 
             function pantilt() {
                 var angle = 0;
@@ -182,6 +200,8 @@
                     if (current_tilt < 0) current_tilt = 0;
                     if (current_tilt > 180) current_tilt = 180;
                     angle = current_tilt;
+                } else {
+                    angle = current_angle;
                 }
 
                 $.get('/api/' + current_direction + '/' + angle);

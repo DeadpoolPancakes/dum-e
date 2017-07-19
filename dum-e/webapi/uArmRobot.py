@@ -123,10 +123,19 @@ class robot:
         cmd = protocol.SET_GRIPPER.format(int(state))
         self.sendcmd(cmd,True)
 
+    def bluetooth(self, state):
+        self.bluetooth = state
+        cmd = protocol.SET_BT.format(int(state))
+        self.sendcmd(cmd,True)
+
     def stop(self):
         cmd = protocol.STOP_MOVING
         self.sendcmd(cmd,True)
         self.moving = False
+
+    def buzzer(Self, frequency, time):
+        cmd = protocol.SET_BUZZER.format(frequency, time)
+        self.sendcmd(cmd,True)
 
     def mode(self, modeid):
         # 0= Normal
@@ -137,9 +146,9 @@ class robot:
         self.sendcmd(cmd,True)
 
     def get_angle(self,n):
-            n = str(int(n))
-            cmd = protocol.GET_ANGLE_OF_JOINT.format(n)
-            self.sendcmd(cmd, True)
+        n = str(int(n))
+        cmd = protocol.GET_ANGLE_OF_JOINT.format(n)
+        self.sendcmd(cmd, True)
 
     def end(self):
         self.moving = True

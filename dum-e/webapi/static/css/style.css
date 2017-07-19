@@ -1,0 +1,44 @@
+        .main {
+            width: 100%;
+            height: 220px;
+            background: #F0F0F0;
+            position: relative;
+        }
+        
+        .main ul,
+        .main li {
+            list-style: none;
+            margin: 0;
+            padding: 0;
+        }
+        
+        .main li {
+            width: 75px;
+            height: 50px;
+            position: absolute;
+            cursor: pointer;
+            line-height: 50px;
+            text-align: center;
+        }
+        
+        .main .up {
+            left: 50%;
+            margin-left: -35px;
+        }
+        
+        .main .down {
+            left: 50%;
+            bottom: 0;
+            margin-left: -35px;
+        }
+        
+        .main .left {
+            top: 50%;
+            margin-top: -35px;
+        }
+        
+        .main .right {
+            top: 50%;
+            right: 25px;
+            margin-top: -35px;
+        }

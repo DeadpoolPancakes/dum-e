@@ -60,10 +60,8 @@
 
 <body>
     <div class="container">
-
-
         <div class="row">
-            <div class="col-xs-12">
+            <div class="col-xs-6 col-xs-offset-3">
                 <h1>Dum-e</h1>
             </div>
         </div>
@@ -95,12 +93,9 @@
     <script src="https://code.jquery.com/jquery-3.1.1.min.js" integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8=" crossorigin="anonymous"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
     <script type="text/javascript">
-        var current_pan = 90;
-        var current_tilt = 90;
-        var pantilt_speed = 60; // Delay between increments in ms
         var interval = null;
-        var current_direction = null;
-        var current_angle = null;
+        var direction = null;
+        var distance = null;
 
         $(function() {
             $(window).on('keydown', function(e) {
@@ -108,37 +103,37 @@
                 switch (e.keyCode) {
                     case 87:
                     case 38: // Arrow Up
-                        current_direction = 'up';
-                        current_angle = 5;
-                        $.get('/api/' + current_direction + '/' + current_angle);
+                        direction = 'up';
+                        distance = 5;
+                        $.get('/api/' + direction + '/' + distance);
                         break;
                     case 83:
                     case 40: // Arrow Down
-                        current_direction = 'down';
-                        current_angle = -5;
-                        $.get('/api/' + current_direction + '/' + current_angle);
+                        direction = 'down';
+                        distance = -5;
+                        $.get('/api/' + direction + '/' + distance);
                         break;
                     case 65:
                     case 37: // Arrow Left
-                        current_direction = 'left';
-                        current_angle = 5;
-                        $.get('/api/' + current_direction + '/' + current_angle);
+                        direction = 'left';
+                        distance = 5;
+                        $.get('/api/' + direction + '/' + distance);
                         break;
                     case 68:
                     case 39: // Arrow Right
-                        current_direction = 'right';
-                        current_angle = -5;
-                        $.get('/api/' + current_direction + '/' + current_angle);
+                        direction = 'right';
+                        distance = -5;
+                        $.get('/api/' + direction + '/' + distance);
                         break;
                     case 109:
-                        current_direction = 'forward';
-                        current_angle = 5;
-                        $.get('/api/' + current_direction + '/' + current_angle);
+                        direction = 'forward';
+                        distance = 5;
+                        $.get('/api/' + direction + '/' + distance);
                         break;
                     case 107:
-                        current_direction = 'back';
-                        current_angle = -5;
-                        $.get('/api/' + current_direction + '/' + current_angle);
+                        direction = 'back';
+                        distance = -5;
+                        $.get('/api/' + direction + '/' + distance);
                         break;
                 }
             });
@@ -151,8 +146,8 @@
 
                     var obj = $(this);
                     var action = obj.data('action');
-                    current_direction = action.split(':')[0];
-                    current_angle = parseInt(action.split(':')[1]);
+                    direction = action.split(':')[0];
+                    distance = parseInt(action.split(':')[1]);
 
                     interval = setInterval(pantilt, pantilt_speed);
                 })
@@ -165,8 +160,8 @@
 
                     var obj = $(this);
                     var action = obj.data('action');
-                    current_direction = action.split(':')[0];
-                    current_angle = parseInt(action.split(':')[1]);
+                    direction = action.split(':')[0];
+                    distance = parseInt(action.split(':')[1]);
 
                     interval = setInterval(pantilt, pantilt_speed);
                 })
@@ -175,37 +170,8 @@
                 });
 
             function pantilt() {
-                var angle = 0;
-
-                if (current_direction == 'up') {
-                    current_pan += current_angle;
-                    if (current_pan < 0) current_pan = 0;
-                    if (current_pan > 180) current_pan = 180;
-                    angle = current_pan;
-                }
-
-                if (current_direction == 'down') {
-                    current_tilt += current_angle;
-                    if (current_tilt < 0) current_tilt = 0;
-                    if (current_tilt > 180) current_tilt = 180;
-                    angle = current_tilt;
-                }
-                if (current_direction == 'left') {
-                    current_tilt += current_angle;
-                    if (current_tilt < 0) current_tilt = 0;
-                    if (current_tilt > 180) current_tilt = 180;
-                    angle = current_tilt;
-                }
-                if (current_direction == 'right') {
-                    current_tilt += current_angle;
-                    if (current_tilt < 0) current_tilt = 0;
-                    if (current_tilt > 180) current_tilt = 180;
-                    angle = current_tilt;
-                } else {
-                    angle = current_angle;
-                }
-
-                $.get('/api/' + current_direction + '/' + angle);
+                angle = distance;
+                $.get('/api/' + direction + '/' + angle);
             }
         });
     </script>

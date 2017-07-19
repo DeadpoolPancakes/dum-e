@@ -40,66 +40,56 @@ def connect(connect):
 def action(action):
     if action == 'grip':
         myRobot.gripper(True)
-        return "holding"
+        return "{'dume':'holding'}"
 
     if action == 'suction':
         myRobot.pump(True)
-        return 'suction cup activated'
+        return "{'dume':'pump on'}"
     
 @app.route('/api/gripper/<int:on>')
 def gripper(on):
     if on == 1:
         myRobot.gripper(True)
-        return "on"
+        return "{'dume':'holding'}"
     elif on == 0:
         myRobot.gripper(False)
-        return "off"    
+        return "{'dume':'letting go'}" 
 
 @app.route('/api/pump/<int:on>')
 def pump(on):
     if on == 1:
         myRobot.pump(True)
-        return "on"
+        return "{'dume':'pump on'}"
     elif on == 0:
         myRobot.pump(False)
-        return "off"    
+        return "{'dume':'pump off'}"   
 
 @app.route('/api/<direction>/<int:angle>')
 def direction(direction, angle):
-    if angle < 0 or angle > 180:
-        return "{'error':'out of range'}"
-
-    angle -= 90
-
+    
     if direction == 'left':
         myRobot.gotorel(0,angle,0,speed)
-        #return "{{'moving':{}}}".format(angle)
-        return "moving left"
+        return "{'dume':'moving left'}"
 
     elif direction == 'right':
         myRobot.gotorel(0,-angle,0,speed)
-        #return "{{'moving':{}}}".format(angle)
-        return "moving right"
+        return "{'dume':'moving right'}"
 
     elif direction == 'up':
         myRobot.gotorel(0,0,angle,speed)
-        #return "{{'moving':{}}}".format(angle)
-        return "moving up"
+        return "{'dume':'moving up'}"
 
     elif direction == 'down':
         myRobot.gotorel(0,0,-angle,speed)
-       #return "{{'moving':{}}}".format(angle)
-        return "moving down"
+        return "{'dume':'moving down'}"
 
     elif direction == 'forward':
         myRobot.gotorel(-angle,0,0,speed)
-       #return "{{'moving':{}}}".format(angle)
-        return "moving forward"
+        return "{'dume':'moving forward'}"
 
     elif direction == 'back':
         myRobot.gotorel(angle,0,0,speed)
-        #return "{{'moving':{}}}".format(angle)  
-        return "moving back"      
+        return "{'dume':'moving back'}""      
 
     return "{'error':'invalid direction'}"
 

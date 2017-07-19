@@ -104,6 +104,11 @@ class robot:
         t = threading.Thread( target=self.goto , args=(x,y,z,speed) )
         t.start()
 
+    def async_gotorel(self,x,y,z, speed):
+        self.moving = True
+        t = threading.Thread( target=self.gotorel , args=(x,y,z,speed) )
+        t.start()
+  
     def pump(self, state):
         self.pumping = state
         cmd = protocol.SET_PUMP.format(int(state))
@@ -117,6 +122,11 @@ class robot:
         self.gripping = state
         cmd = protocol.SET_GRIPPER.format(int(state))
         self.sendcmd(cmd,True)
+
+    def stop(self):
+        cmd = protocol.STOP_MOVING
+        self.sendcmd(cmd,True)
+        self.moving = False
 
     def mode(self, modeid):
         # 0= Normal
@@ -133,9 +143,9 @@ class robot:
 
     def end(self):
         self.moving = True
-        x = str(0)
+        x = str(50)
         y = str(0)
-        z = str(0)
+        z = str(112)
         s = str(3000)   
         cmd = protocol.SET_POSITION.format(x,y,z,s)
         self.sendcmd(cmd, True)

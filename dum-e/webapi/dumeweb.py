@@ -89,7 +89,7 @@ def direction(direction, angle):
 
     elif direction == 'back':
         myRobot.gotorel(angle,0,0,speed)
-        return "{'dume':'moving back'}""      
+        return "{'dume':'moving back'}"      
 
     return "{'error':'invalid direction'}"
 

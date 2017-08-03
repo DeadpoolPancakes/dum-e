@@ -34,7 +34,10 @@ def connect(connect):
         time.sleep(1)
         myRobot.end()
         return "{'dume':'disconnected'}"
-   
+
+@app.route('/api/buzzer/<int:time>/<int:frequency>')
+def buzzer(time, frequency):
+    myRobot.buzzer(frequency, time);
 
 @app.route('/api/action/<action>')
 def action(action):

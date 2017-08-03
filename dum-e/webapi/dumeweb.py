@@ -40,56 +40,56 @@ def connect(connect):
 def action(action):
     if action == 'grip':
         myRobot.gripper(True)
-        return "{'dume':'holding'}"
+        return "{'dum-e':'holding'}"
 
     if action == 'suction':
         myRobot.pump(True)
-        return "{'dume':'pump on'}"
+        return "{'dum-e':'pump on'}"
     
 @app.route('/api/gripper/<int:on>')
 def gripper(on):
     if on == 1:
         myRobot.gripper(True)
-        return "{'dume':'holding'}"
+        return "{'dum-e':'holding'}"
     elif on == 0:
         myRobot.gripper(False)
-        return "{'dume':'letting go'}" 
+        return "{'dum-e':'letting go'}" 
 
 @app.route('/api/pump/<int:on>')
 def pump(on):
     if on == 1:
         myRobot.pump(True)
-        return "{'dume':'pump on'}"
+        return "{'dum-e':'pump on'}"
     elif on == 0:
         myRobot.pump(False)
-        return "{'dume':'pump off'}"   
+        return "{'dum-e':'pump off'}"   
 
 @app.route('/api/<direction>/<int:angle>')
 def direction(direction, angle):
     
     if direction == 'left':
         myRobot.gotorel(0,angle,0,speed)
-        return "{'dume':'moving left'}"
+        return "{'dum-e':'moving left'}"
 
     elif direction == 'right':
         myRobot.gotorel(0,-angle,0,speed)
-        return "{'dume':'moving right'}"
+        return "{'dum-e':'moving right'}"
 
     elif direction == 'up':
         myRobot.gotorel(0,0,angle,speed)
-        return "{'dume':'moving up'}"
+        return "{'dum-e':'moving up'}"
 
     elif direction == 'down':
         myRobot.gotorel(0,0,-angle,speed)
-        return "{'dume':'moving down'}"
+        return "{'dum-e':'moving down'}"
 
     elif direction == 'forward':
-        myRobot.gotorel(-angle,0,0,speed)
-        return "{'dume':'moving forward'}"
+        myRobot.gotorel(angle,0,0,speed)
+        return "{'dum-e':'moving forward'}"
 
     elif direction == 'back':
-        myRobot.gotorel(angle,0,0,speed)
-        return "{'dume':'moving back'}"      
+        myRobot.gotorel(-angle,0,0,speed)
+        return "{'dum-e':'moving back'}"      
 
     return "{'error':'invalid direction'}"
 

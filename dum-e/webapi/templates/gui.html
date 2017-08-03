@@ -68,10 +68,10 @@
         <div class="row">
             <div class="col-xs-12">
                 <ul class="main">
-                    <li class="up btn btn-default" data-action="up:-5"><i class="mdi mdi-arrow-up-bold mdi-48px"></i></li>
+                    <li class="up btn btn-default" data-action="up:+5"><i class="mdi mdi-arrow-up-bold mdi-48px"></i></li>
                     <li class="down btn btn-default" data-action="down:+5"><i class="mdi mdi-arrow-down-bold mdi-48px"></i></li>
                     <li class="left btn btn-default" data-action="left:+5"><i class="mdi mdi-arrow-left-bold mdi-48px"></i></li>
-                    <li class="right btn btn-default" data-action="right:-5"><i class="mdi mdi-arrow-right-bold mdi-48px"></i></li>
+                    <li class="right btn btn-default" data-action="right:+5"><i class="mdi mdi-arrow-right-bold mdi-48px"></i></li>
                 </ul>
             </div>
             <div class="col-xs-12">
@@ -110,7 +110,7 @@
                     case 83:
                     case 40: // Arrow Down
                         direction = 'down';
-                        distance = -5;
+                        distance = 5;
                         $.get('/api/' + direction + '/' + distance);
                         break;
                     case 65:
@@ -122,7 +122,7 @@
                     case 68:
                     case 39: // Arrow Right
                         direction = 'right';
-                        distance = -5;
+                        distance = 5;
                         $.get('/api/' + direction + '/' + distance);
                         break;
                     case 109:
@@ -132,7 +132,7 @@
                         break;
                     case 107:
                         direction = 'back';
-                        distance = -5;
+                        distance = 5;
                         $.get('/api/' + direction + '/' + distance);
                         break;
                 }
@@ -141,33 +141,35 @@
                 clearInterval(interval)
             });
             $('.main').on('mousedown', 'li', function(e) {
-                    e.preventDefault();
-                    clearInterval(interval);
+                e.preventDefault();
+                clearInterval(interval);
 
-                    var obj = $(this);
-                    var action = obj.data('action');
-                    direction = action.split(':')[0];
-                    distance = parseInt(action.split(':')[1]);
+                var obj = $(this);
+                var action = obj.data('action');
+                direction = action.split(':')[0];
+                distance = parseInt(action.split(':')[1]);
 
-                    interval = setInterval(pantilt, pantilt_speed);
-                })
-                .on('mouseup', 'li', function(e) {
-                    clearInterval(interval);
-                });
+                interval = setInterval(pantilt, 60);
+            })
+            $('.main').on('keyup', 'li', function(e) {
+                clearInterval(interval);
+            });
+
             $('.action').on('mousedown', 'button', function(e) {
-                    e.preventDefault();
-                    clearInterval(interval);
+                e.preventDefault();
+                clearInterval(interval);
 
-                    var obj = $(this);
-                    var action = obj.data('action');
-                    direction = action.split(':')[0];
-                    distance = parseInt(action.split(':')[1]);
+                var obj = $(this);
+                var action = obj.data('action');
+                direction = action.split(':')[0];
+                distance = parseInt(action.split(':')[1]);
 
-                    interval = setInterval(pantilt, pantilt_speed);
-                })
-                .on('mouseup', 'button', function(e) {
-                    clearInterval(interval);
-                });
+                interval = setInterval(pantilt, 60);
+            })
+            $('.action').on('keyup', 'button', function(e) {
+                clearInterval(interval);
+            });
+
 
             function pantilt() {
                 angle = distance;

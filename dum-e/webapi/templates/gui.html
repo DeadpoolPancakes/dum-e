@@ -55,6 +55,16 @@
             right: 25px;
             margin-top: -35px;
         }
+        .main .back {
+            top: 50%;
+            right: 125px;
+            margin-top: -35px;
+        }
+        .main .forward {
+            top: 50%;
+            left: 125px;
+            margin-top: -35px;
+        }        
     </style>
 </head>
 
@@ -72,6 +82,8 @@
                     <li class="down btn btn-default" data-action="down:+5"><i class="mdi mdi-arrow-down-bold mdi-48px"></i></li>
                     <li class="left btn btn-default" data-action="left:+5"><i class="mdi mdi-arrow-left-bold mdi-48px"></i></li>
                     <li class="right btn btn-default" data-action="right:+5"><i class="mdi mdi-arrow-right-bold mdi-48px"></i></li>
+                    <li class="forward btn btn-default" data-action="forward:+5"><i class="mdi mdi-format-vertical-align-top mdi-48px"></i></li>
+                    <li class="back btn btn-default" data-action="back:+5"><i class="mdi mdi-format-vertical-align-bottom mdi-48px"></i></li>
                 </ul>
             </div>
             <div class="col-xs-12">
@@ -95,7 +107,7 @@
     <script type="text/javascript">
         var interval = null;
         var direction = null;
-        var distance = null;
+        var distance = 5;
 
         $(function() {
             $(window).on('keydown', function(e) {
@@ -103,36 +115,32 @@
                 switch (e.keyCode) {
                     case 87:
                     case 38: // Arrow Up
-                        direction = 'up';
-                        distance = 5;
+                        direction = 'forward';
                         $.get('/api/' + direction + '/' + distance);
                         break;
                     case 83:
                     case 40: // Arrow Down
-                        direction = 'down';
-                        distance = 5;
+                        direction = 'back';
                         $.get('/api/' + direction + '/' + distance);
                         break;
                     case 65:
                     case 37: // Arrow Left
                         direction = 'left';
-                        distance = 5;
                         $.get('/api/' + direction + '/' + distance);
                         break;
                     case 68:
                     case 39: // Arrow Right
                         direction = 'right';
-                        distance = 5;
                         $.get('/api/' + direction + '/' + distance);
                         break;
                     case 109:
-                        direction = 'forward';
-                        distance = 5;
+                    case 16:
+                        direction = 'up';
                         $.get('/api/' + direction + '/' + distance);
                         break;
                     case 107:
-                        direction = 'back';
-                        distance = 5;
+                    case 17:
+                        direction = 'down';
                         $.get('/api/' + direction + '/' + distance);
                         break;
                 }
@@ -149,9 +157,9 @@
                 direction = action.split(':')[0];
                 distance = parseInt(action.split(':')[1]);
 
-                interval = setInterval(pantilt, 60);
+                interval = setInterval(sendRequest, 50);
             })
-            $('.main').on('keyup', 'li', function(e) {
+            $('.main').on('mouseup', 'li', function(e) {
                 clearInterval(interval);
             });
 
@@ -164,16 +172,15 @@
                 direction = action.split(':')[0];
                 distance = parseInt(action.split(':')[1]);
 
-                interval = setInterval(pantilt, 60);
+                interval = setInterval(sendRequest, 50);
             })
-            $('.action').on('keyup', 'button', function(e) {
+            $('.action').on('mouseup', 'button', function(e) {
                 clearInterval(interval);
             });
 
-
-            function pantilt() {
-                angle = distance;
-                $.get('/api/' + direction + '/' + angle);
+            function sendRequest() {
+                value = distance;
+                $.get('/api/' + direction + '/' + value);
             }
         });
     </script>

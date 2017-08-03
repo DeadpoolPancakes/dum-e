@@ -108,6 +108,7 @@
         var interval = null;
         var direction = null;
         var distance = 5;
+        var gripper = 0;
 
         $(function() {
             $(window).on('keydown', function(e) {
@@ -142,6 +143,14 @@
                     case 17:
                         direction = 'down';
                         $.get('/api/' + direction + '/' + distance);
+                        break;
+                    case 32:
+                        if (gripper == 0){
+                            gripper = 1
+                        }else{
+                            gripper = 0
+                        }
+                        $.get('/api/gripper/' + gripper);
                         break;
                 }
             });

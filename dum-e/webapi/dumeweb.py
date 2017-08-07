@@ -39,6 +39,16 @@ def connect(connect):
 def buzzer(time, frequency):
     myRobot.buzzer(frequency, time);
 
+@app.route('/api/script/<script>')
+def script(script):
+    if script == 'wave':
+        myRobot.goto(200,0,100,6000)
+        myRobot.gotorel(0,50,0,3000)
+        myRobot.gotorel(0,-100,0,3000)
+        myRobot.gotorel(0,100,0,3000)
+        myRobot.gotorel(0,-100,0,3000)
+        myRobot.goto(200,0,100,6000)
+
 @app.route('/api/action/<action>')
 def action(action):
     if action == 'grip':

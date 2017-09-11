@@ -26,8 +26,6 @@ def home():
 def connect(connect):
     if connect == 1:
         myRobot.connect()
-        time.sleep(1)
-        myRobot.goto(200,0,100,3000)
         return "{'dume':'connected'}"
 
     elif connect == 0:
@@ -77,31 +75,31 @@ def pump(on):
         myRobot.pump(False)
         return "{'dum-e':'pump off'}"   
 
-@app.route('/api/<direction>/<int:angle>')
-def direction(direction, angle):
+@app.route('/api/<direction>/<int:distance>')
+def direction(direction, distance):
     
     if direction == 'left':
-        myRobot.gotorel(0,angle,0,speed)
+        myRobot.gotorel(0,distance,0,speed)
         return "{'dum-e':'moving left'}"
 
     elif direction == 'right':
-        myRobot.gotorel(0,-angle,0,speed)
+        myRobot.gotorel(0,-distance,0,speed)
         return "{'dum-e':'moving right'}"
 
     elif direction == 'up':
-        myRobot.gotorel(0,0,angle,speed)
+        myRobot.gotorel(0,0,distance,speed)
         return "{'dum-e':'moving up'}"
 
     elif direction == 'down':
-        myRobot.gotorel(0,0,-angle,speed)
+        myRobot.gotorel(0,0,-distance,speed)
         return "{'dum-e':'moving down'}"
 
     elif direction == 'forward':
-        myRobot.gotorel(angle,0,0,speed)
+        myRobot.gotorel(distance,0,0,speed)
         return "{'dum-e':'moving forward'}"
 
     elif direction == 'back':
-        myRobot.gotorel(-angle,0,0,speed)
+        myRobot.gotorel(-distance,0,0,speed)
         return "{'dum-e':'moving back'}"      
 
     return "{'error':'invalid direction'}"

@@ -18,3 +18,6 @@ def nod(self):
     myRobot.gotorel(100,0,0,3000)
     myRobot.gotorel(-100,0,0,3000)
     myRobot.goto(200,0,100,6000)
+
+def home(self):
+    myRobot.goto(0,0,0,3000)  

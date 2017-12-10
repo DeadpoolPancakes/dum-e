@@ -36,14 +36,19 @@ def connect(connect):
 
 @app.route('/api/buzzer/<int:time>/<int:frequency>')
 def buzzer(time, frequency):
-    myRobot.buzzer(frequency, time);
+    myRobot.buzzer(frequency, time)
 
 @app.route('/api/script/<script>')
 def script(script):
     if script == 'wave':
-        action.wave
+        actions.wave
+        return "{'dum-e':'going home'}"
     elif script == 'nod':
-        action.nod    
+        actions.nod
+        return "{'dum-e':'going home'}"    
+    elif script == 'home':
+        myRobot.goto(50,0,112,3000) 
+        return "{'dum-e':'going home'}"
 
 @app.route('/api/action/<action>')
 def action(action):
